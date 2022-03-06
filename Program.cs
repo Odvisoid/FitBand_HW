@@ -1,30 +1,30 @@
-﻿using System;
+
 using System.Threading;
-using System.Collections.Generic;
 namespace MyProg
 {
     public class StepExtension
     {
-        public int SToSteps(double s, int height)
+        public int DistanceToSteps(double distance, int height)
         {
-            return Convert.ToInt32(s / (height * 0.45 / 100000));
+            return Convert.ToInt32(distance / (height * 0.45 / 100000));
         }
-        public double StepsToS(int steps, int height)
+        public double StepsToDistance(int steps, int height)
         {
             return Math.Round(steps * height * 0.45 / 100000, 1);
         }
     }
-    abstract class ForShow
+    abstract class ForFuncShow
     {
         public abstract void Show();
     }
-    class Stepcounter : ForShow
+    class Stepcounter : ForFuncShow
     {
+        static int ClearingNumber;
         public StepExtension counter = new StepExtension();
         public int[] StepsPerDay = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
         public double[] distance = new double[7] { 0, 0, 0, 0, 0, 0, 0 };
         public int[] history = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
-        public void History()
+        public void ShowHistory()
         {
             for (int i = 0; i < 7; i++)
             {
@@ -65,20 +65,20 @@ namespace MyProg
                 Console.WriteLine(" шагов");
             }
         }
-        public void Running(int day, double s, int t, int height)
+        public void CountRunning(int day, double distance, int time, int height)
         {
-            CountStepsAtEnd(day, counter.SToSteps(s, height), height);
+            CountStepsAtEnd(day, counter.DistanceToSteps(distance, height), height);
             Console.Write("Вы прошли ");
-            Console.Write(counter.SToSteps(s, height));
+            Console.Write(counter.DistanceToSteps(distance, height));
             Console.WriteLine(" шагов");
             Console.Write("Ваша средняя скорость: ");
-            Console.Write(Math.Round(s / t, 1));
+            Console.Write(Math.Round(distance / time, 1));
             Console.WriteLine(" км/ч");
-            history[day - 1] += counter.SToSteps(s, height);
+            history[day - 1] += counter.DistanceToSteps(distance, height);
         }
         public void CountStepsAtEnd(int day, int steps, int height)
         {
-            if (day == 1)
+            if (day == 1 &ClearingNumber == 0)
             {
                 for (int i = 1; i < 7; i++)
                 {
@@ -87,8 +87,13 @@ namespace MyProg
                     history[i] = 0;
                 }
             }
+            ClearingNumber++;
+            if (day == 7 & ClearingNumber != 0)
+            {
+                ClearingNumber = 0;
+            }
             StepsPerDay[day - 1] += steps;
-            distance[day - 1] += counter.StepsToS(steps, height);
+            distance[day - 1] += counter.StepsToDistance(steps, height);
         }
         public override void Show()
         {
@@ -135,7 +140,7 @@ namespace MyProg
             }
         }
     }
-    class TimeShower : ForShow
+    class TimeShower : ForFuncShow
     {
         public DateTime date = new DateTime();
         public TimeShower()
@@ -149,7 +154,7 @@ namespace MyProg
     }
     class Timing
     {
-        public void Timer()
+        public void StartTimer()
         {
             int sec, min;
             Console.WriteLine("Сколько секунд");
@@ -167,13 +172,17 @@ namespace MyProg
             Console.Beep();
             Console.Beep();
             Console.Beep();
+            Console.WriteLine("Время вышло");
         }
 
     }
     class User
     {
-        public string? name, fam, search;
+        public string name, fam, search;
         public int height, weight;
+        Stepcounter UserStepcounter = new Stepcounter();
+        TimeShower UserTimeShower = new TimeShower();
+        Timing UserTiming = new Timing();
         public User()
         {
             Console.WriteLine("Введите имя");
@@ -194,18 +203,26 @@ namespace MyProg
             int day;
             Console.WriteLine("Какой сегодня день недели?(по номеру)");
             day = Convert.ToInt32(Console.ReadLine());
+            while (true) {
+                if(day <= 7 & day >= 1)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Такого дня нет. Введите день недели(по номеру) еще раз");
+                    day = Convert.ToInt32(Console.ReadLine());
+                }
+            }
             Console.WriteLine("С чего желаете начать?");
             while (true)
             {
                 search = Console.ReadLine();
                 if (search != "Завершение работы")
                 {
-                    Stepcounter UserStepcounter = new Stepcounter();
-                    TimeShower UserTimeShower = new TimeShower();
-                    Timing UserTiming = new Timing();
                     if (search == "Подсчитать шаги")
                     {
-                        while (search != "Ничего")
+                        while (search != "Ничего из перечисленного")
                         {
                             Console.WriteLine("Хотите узнать статистику, записать шаги, записать результаты пробежки или узнать историю пробежек?");
                             search = Console.ReadLine();
@@ -222,17 +239,17 @@ namespace MyProg
                             }
                             else if (search == "Записать результаты пробежки")
                             {
-                                double s;
-                                int t;
+                                double distance;
+                                int time;
                                 Console.WriteLine("Сколько пробежали? (в км)");
-                                s = Convert.ToDouble(Console.ReadLine());
+                                distance = Convert.ToDouble(Console.ReadLine());
                                 Console.WriteLine("Сколько потратили времени? (в часах)");
-                                t = Convert.ToInt32(Console.ReadLine());
-                                UserStepcounter.Running(day, s, t, height);
+                                time = Convert.ToInt32(Console.ReadLine());
+                                UserStepcounter.CountRunning(day, distance, time, height);
                             }
                             else if (search == "Узнать историю пробежек")
                             {
-                                UserStepcounter.History();
+                                UserStepcounter.ShowHistory();
                             }
                         }
                     }
@@ -242,7 +259,11 @@ namespace MyProg
                     }
                     else if (search == "Таймер")
                     {
-                        UserTiming.Timer();
+                        UserTiming.StartTimer();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Команда не опознана");
                     }
                 }
                 else
@@ -258,8 +279,8 @@ namespace MyProg
     {
         static void Main()
         {
-            User a = new User();
-            a.Interact();
+            User user = new User();
+            user.Interact();
         }
     }
 }
