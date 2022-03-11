@@ -1,0 +1,15 @@
+C:\Users\user\source\repos\FitBand\FitBand\bin\Debug\net6.0\FitBand.exe
+C:\Users\user\source\repos\FitBand\FitBand\bin\Debug\net6.0\FitBand.deps.json
+C:\Users\user\source\repos\FitBand\FitBand\bin\Debug\net6.0\FitBand.runtimeconfig.json
+C:\Users\user\source\repos\FitBand\FitBand\bin\Debug\net6.0\FitBand.dll
+C:\Users\user\source\repos\FitBand\FitBand\bin\Debug\net6.0\ref\FitBand.dll
+C:\Users\user\source\repos\FitBand\FitBand\bin\Debug\net6.0\FitBand.pdb
+C:\Users\user\source\repos\FitBand\FitBand\obj\Debug\net6.0\FitBand.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\FitBand\FitBand\obj\Debug\net6.0\FitBand.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\FitBand\FitBand\obj\Debug\net6.0\FitBand.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\FitBand\FitBand\obj\Debug\net6.0\FitBand.AssemblyInfo.cs
+C:\Users\user\source\repos\FitBand\FitBand\obj\Debug\net6.0\FitBand.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\FitBand\FitBand\obj\Debug\net6.0\FitBand.dll
+C:\Users\user\source\repos\FitBand\FitBand\obj\Debug\net6.0\ref\FitBand.dll
+C:\Users\user\source\repos\FitBand\FitBand\obj\Debug\net6.0\FitBand.pdb
+C:\Users\user\source\repos\FitBand\FitBand\obj\Debug\net6.0\FitBand.genruntimeconfig.cache
