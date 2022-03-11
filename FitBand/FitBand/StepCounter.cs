@@ -5,44 +5,12 @@ class Stepcounter : ForFuncShow
         public int[] StepsPerDay = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
         public double[] distance = new double[7] { 0, 0, 0, 0, 0, 0, 0 };
         public int[] history = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
+        public string[] daynames = new string[7] { "Пн: " , "Вт: " , "Ср: ", "Чт: ", "Пт: ", "Сб: ", "Вс: " };
         public void ShowHistory()
         {
             for (int i = 0; i < 7; i++)
             {
-                if (i + 1 == 1)
-                {
-                    Console.Write("Пн: ");
-                }
-                else
-                    if (i + 1 == 2)
-                {
-                    Console.Write("Вт: ");
-                }
-                else
-                    if (i + 1 == 3)
-                {
-                    Console.Write("Ср: ");
-                }
-                else
-                    if (i + 1 == 4)
-                {
-                    Console.Write("Чт: ");
-                }
-                else
-                    if (i + 1 == 5)
-                {
-                    Console.Write("Пт: ");
-                }
-                else
-                    if (i + 1 == 6)
-                {
-                    Console.Write("Сб: ");
-                }
-                else
-                {
-                    Console.Write("Вс: ");
-                }
-                Console.Write(history[i]);
+                Console.Write(daynames[i]);
                 Console.WriteLine(" шагов");
             }
         }
@@ -80,40 +48,7 @@ class Stepcounter : ForFuncShow
         {
             for (int i = 0; i < 7; i++)
             {
-                if (i + 1 == 1)
-                {
-                    Console.Write("Пт: ");
-                }
-                else
-                    if (i + 1 == 2)
-                {
-                    Console.Write("Вт: ");
-                }
-                else
-                    if (i + 1 == 3)
-                {
-                    Console.Write("Ср: ");
-                }
-                else
-                    if (i + 1 == 4)
-                {
-                    Console.Write("Чт: ");
-                }
-                else
-                    if (i + 1 == 5)
-                {
-                    Console.Write("Пт: ");
-                }
-                else
-                    if (i + 1 == 6)
-                {
-                    Console.Write("Сб: ");
-                }
-                else
-                {
-                    Console.Write("Вс: ");
-
-                }
+                Console.Write(daynames[i]);
                 Console.Write(StepsPerDay[i]);
                 Console.Write(" Дистанция: ");
                 Console.Write(Math.Round(distance[i], 1));
